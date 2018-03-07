@@ -1,0 +1,5 @@
+{
+    "version": "2.4",
+    "content": "请更新版本",
+    "url": "itms-services:///?action=download-manifest&url=https://raw.githubusercontent.com/zhichaotang/blog/master/fxb.plist"
+}

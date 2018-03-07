@@ -1,0 +1,54 @@
+
+/*--------------SLIDER----------------*/
+
+#slider {
+	width: 90%;
+	margin: 50px auto;
+}
+
+#slider .slides {
+	list-style-type:none;
+}
+/*--------------CONTROLS--------------*/
+
+/*position controls*/
+#slider .controls li {
+	top: 50%;
+	margin-top: -30px;
+	list-style-type:none;
+}
+
+#slider .controls li:nth-child(1) {
+	left: 0;
+}
+
+#slider .controls li:nth-child(2) {
+	right: 0;
+}
+
+
+/*------------PAGINATION------------*/
+
+/*style pagination*/
+#slider .pagination_img li {
+	background-color: #ddd;
+	list-style-type:none;
+}
+
+#slider .pagination_img li.active {
+	background-color: #000;
+}
+
+
+/*-------------HELPERS----------------*/
+
+.responsive {
+	width: 100%;
+	height: auto;
+}
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}

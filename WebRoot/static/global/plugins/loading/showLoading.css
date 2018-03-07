@@ -1,0 +1,22 @@
+.loading-indicator {
+    position:fixed !important;
+top:30% !important;
+left:48% !important;
+    height: 60px;
+    width: 60px;
+    background: url('./loading-bars.gif') no-repeat center center;
+    background-size: 100%;
+}
+
+.loading-indicator-overlay {
+    background-color: #ffffff;
+    opacity: 0.6;
+    filter: alpha(opacity = 60);
+}
+
+#loading-indicator-undefined-overlay{
+    z-index: 100000 !important;
+}
+#loading-indicator-undefined{
+    z-index: 100001 !important;
+}

@@ -1,0 +1,17 @@
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>My JSPTag Library</shortname>
+	<uri>/static</uri>
+	<info>自定义标签调用静态方法</info>
+	<function>
+		<name>invoke</name>
+		<function-class>com.zwyl.yinongtong.tag.StaticInvokeUtil</function-class>
+		<function-signature>java.lang.Object invoke(java.lang.String,java.lang.String,java.lang.Class[],java.lang.Object[])</function-signature>
+	</function>
+	<function>
+		<name>toListAndSort</name>
+		<function-class>com.zwyl.yinongtong.util.Utils</function-class>
+		<function-signature>java.util.List toListAndSort(java.util.Set,java.lang.String,boolean)</function-signature>
+	</function>
+</taglib>

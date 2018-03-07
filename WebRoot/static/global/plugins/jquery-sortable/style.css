@@ -1,0 +1,21 @@
+ul.gbsortable{
+    padding: 0px;
+}
+.gbsortable li {
+    list-style: none;
+    position:relative;
+    float: left;
+    height: 200px;
+    border: 1px solid #EFEFEF;
+}
+.gbsortable li .edit_img{
+    height:100%;
+}
+
+li .img_del{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 20px !important;
+    padding: 1px !important;
+}

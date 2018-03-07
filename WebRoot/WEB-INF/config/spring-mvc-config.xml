@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!-- 搜索 samples.webflow 包里的 @Component 注解，并将其部署到容器中 -->
+	<context:component-scan base-package="com.xxbs.v1.controller" />
+	<!-- 启用基于注解的配置 -->
+	<context:annotation-config />
+	<!-- kaptcha 验证码插件 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">red</prop>
+						<prop key="kaptcha.image.width">250</prop>
+						<prop key="kaptcha.textproducer.font.size">90</prop>
+						<prop key="kaptcha.image.height">90</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<!-- <property name="interceptors"> <list> <value></value> </list> </property> -->
+	</bean>
+	
+	<bean id="adminInterceptor" class="com.xxbs.v1.interceptor.AdminInterceptor">
+		<!-- 设置用户登录不被拦截 -->
+		<property name="excludedUrls">
+			<list>
+				<value>/home.do</value>
+				<value>/login.do</value>
+				<value>/doLogin.do</value>
+				<value>/sms/sendSmsCode.do</value>
+			</list>
+		</property>
+	</bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 设置需要拦截的访问 -->
+			<!-- <mvc:mapping path="/*.do" />
+			<mvc:mapping path="/*/*.do" /> -->
+			<mvc:mapping path="/role/*.do" />
+			<mvc:mapping path="/mobileProInfo/*.do" />
+			<mvc:mapping path="/fusionProInfo/*.do" />
+			<mvc:mapping path="/ysxSchool/*.do" />
+			<mvc:mapping path="/feedback/*.do" />
+			<mvc:mapping path="/upload_json.jsp" />
+			<ref bean="adminInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	 <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+                <property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <mvc:resources mapping="/resource/**" location="/resource/" />
+
+    <!-- 定义无Controller的path<->view直接映射 -->
+    <mvc:view-controller path="/" view-name="redirect:/"/>
+
+    <!-- 支持Shiro对Controller的方法级AOP安全控制 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+
+    <!-- 上传文件拦截，设置最大上传文件大小,10M=10*1024*1024(B)=10485760 bytes -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="defaultEncoding" value="utf-8" />
+        <property name="maxUploadSize" value="10485760"/>
+    </bean>
+</beans>

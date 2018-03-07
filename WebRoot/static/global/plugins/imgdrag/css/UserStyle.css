@@ -1,0 +1,29 @@
+﻿@charset "utf-8";
+.imgList{float:left;list-style:none;padding:0px;margin:0px;width:100%;}
+.imgList li{float:left;cursor:pointer;padding:0px;margin:0px;border:0px solid #000000;text-align:center;
+    position: relative;}
+.imgList li img{height:100%;}
+.imgList li.active{background:#f75d88;border:1px solid red;}
+.imgList li div{ margin-top:-4px;margin-top:0px\9;color:#ffffff;font-weight:bold;height:45px;border:0px yellow solid;/* filter:alpha(opacity=50);    -moz-opacity:0.8;    width:auto !important;*/width:230px;padding-top:5px;margin-left:15px;*margin-left:0px;_margin-left:0px;background:url("../img/bg_topic.jpg");background-repeat:repeat-x;line-height:28px;font-size:14px;_font-size:12px;}
+
+@media screen and (-webkit-min-device-pixel-ratio:0){ .imgList li div {margin-top:0px;} }
+.sortList{list-style:none;padding:0px;margin:0 auto;border:0px solid red;height:54px;}
+.sortList li{text-align:center;float:left;cursor:pointer;background:#FFF;min-width:50px;height:54px;margin:0px 0px 0px 12px;_margin:0px 0px 0px 10px;padding:0px;border: 1px solid #e7ecf1;}
+.sortList li span{font-size:20px;font-weight:bold;float:left;margin:10px 0px 0px 42px;}
+.sortListCH{list-style:none;padding:0px;margin:0 auto;border:0px solid red;height:54px;}
+.sortListCH li{text-align:center;float:left;cursor:pointer;background:#FFF;min-width:50px;height:54px;margin:0px 0px 0px 2px;_margin:0px 0px 0px 10px;padding:0px;border: 1px solid #e7ecf1;}
+.sortListCH li span{font-size:20px;font-weight:bold;float:left;margin:10px 0px 0px 42px;}
+.sortListBg{height:100%;margin:0 auto;}
+.sortListBg img{height:100%;}
+.Bg0{background-image:url(../img/bg_01.png);background-repeat:no-repeat;}
+.Bg1{background-image:url(../img/bg_02.png);background-repeat:no-repeat;}
+.Bg2{background-image:url(../img/bg_03.png);background-repeat:no-repeat;}
+.Bg3{background-image:url(../img/bg_04.png);background-repeat:no-repeat;}
+.Bg4{background-image:url(../img/bg_05.png);background-repeat:no-repeat;}
+.Bg5{background-image:url(../img/bg_06.png);background-repeat:no-repeat;}
+.Bg6{background-image:url(../img/bg_07.png);background-repeat:no-repeat;}
+.clear{clear:both;}
+.image_shadow{filter:Chroma(Color="#FFFFFF");filter:alpha( Color="#FFFFFF",opacity=20);filter:alpha(opacity=20);-moz-opacity:0.2;-khtml-opacity:0.2;opacity:0.2;}
+.selli{background-repeat:no-repeat;color:White;font-family:'Microsoft YaHei';margin:-1px 0px 0px 4px;text-align:center;cursor:pointer;background:#000;min-width:50px;height:54px;}
+.DropDiv{position:absolute;color:White;min-width:50px;height:54px;margin:5px 14px 2px 0px;}
+.DropDiv img{height: 100%;}
