@@ -1,6 +1,5 @@
 
 function getDatatablesInitInfo(){
-	alert("getDatatablesInitInfo");
     return {
         "sSearch": "",
         "sProcessing": "正在加载中......",
@@ -160,9 +159,12 @@ importAction_url=rootpath+"/"+module+"/importAction.do";
 exportExcel_url=rootpath+"/"+module+"/exportExcel.do";
 row_checkbox="row_checkbox";
 all_selected_checkbox="all_selected_checkbox";
-selected_row_ids="selected_row_ids";
-search_form="search_form";
-data_table="data_table";
+//selected_row_ids="selected_row_ids";
+selected_row_ids="selectedUserId";
+//search_form="search_form";
+search_form="form_search";
+//data_table="data_table";
+data_table="sample_table";
 add_form="add_form";
 add_modal="add_modal";
 update_form="update_form";

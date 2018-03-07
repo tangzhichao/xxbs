@@ -1,8 +1,7 @@
 
 var Datatables = function () {
-	alert(listQuery_url);
     var e = function () {
-        var e = $(data_table);
+        var e = $('#'+data_table);
         e.dataTable({
                 "processing": true,
                 "serverSide": true,
@@ -17,11 +16,11 @@ var Datatables = function () {
                 	
                 	searchValidate();
                 	
-                    var params = $(search_form).formToArray();
+                    var params = $('#'+search_form).formToArray();
                     //params.push({"name":"partId","value":$("#partId").val()+""})
                     //params.push({"name":"psState","value":$("#psState").val()+""})
-                    alert(params.toString());
-                    alert(JSON.stringify(params));
+                    //alert(params.toString());
+                    //alert(JSON.stringify(params));
                     $.merge(aoData,params);
                 },
                 "sAjaxSource": listQuery_url,
@@ -46,7 +45,6 @@ var Datatables = function () {
     return {
         init: function () {
             jQuery().dataTable && (e());
-            alert("init");
         }
     };
 }();

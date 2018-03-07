@@ -56,5 +56,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 <jsp:include page="../script.jsp"></jsp:include>
 <jsp:include page="userScript.jsp"></jsp:include>
-<jsp:include page="ready.jsp"></jsp:include>
 </html>

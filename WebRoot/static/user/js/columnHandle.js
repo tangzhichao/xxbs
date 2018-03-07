@@ -3,7 +3,7 @@ var handleColumn=[
         "targets": [0],// 目标列位置，下标从0开始
         "orderable": false,//禁用排序
         "render":function(data, type, row){
-        	var selectedId=getSelectedId();
+        	var selectedId=getSelectedRowId();
         	var c="";
         	if(selectedId.indexOf(",")>0){
         		var sIds=selectedId.split(",");
