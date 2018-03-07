@@ -49,6 +49,17 @@ public class UserController {
 	public String list(HttpServletRequest request, HttpServletResponse response) {
 		return "user/list";
 	}
+	/**
+	 * 列表页面
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/list2.do")
+	public String list2(HttpServletRequest request, HttpServletResponse response) {
+		return "user2/list";
+	}
 
 	/**
 	 * 列表数据查询

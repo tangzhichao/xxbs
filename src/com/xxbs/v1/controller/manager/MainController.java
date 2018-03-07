@@ -48,5 +48,9 @@ public class MainController {
 	public String home(HttpServletRequest request,HttpServletResponse response) {
 		return "home";
 	}
+	@RequestMapping(value = "/base.do")
+	public String base(HttpServletRequest request,HttpServletResponse response) {
+		return "base";
+	}
 
 }
