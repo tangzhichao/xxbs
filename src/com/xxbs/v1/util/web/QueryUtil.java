@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -114,6 +116,44 @@ public class QueryUtil {
 		List<Map<String,Object>> list =basicDAO.findBySQL(dataSql, values,ParamUtil.getPageSize(request) , ParamUtil.getPageIndex(request));
 		Integer count =basicDAO.findCountBySQL(countSql, values);
 		return QueryUtil.datatablesResponse(request,response, list, count);
+	}
+	public static JSONObject queryById(HttpServletRequest request,HttpServletResponse response,
+			String module,String fields,String from,String id){
+		
+		String where=" where t1.id=? ";
+		
+		ApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()); 
+		BasicDAO basicDAO = springContext.getBean(BasicDAO.class);
+		
+		List<Object> values=new ArrayList<>();
+		values.add(id);
+		List<Map> columnConfig = AutoGenerater.getColumnConfig(module);
+		for (Map map : columnConfig) {
+			String table=Utils.toString(map.get("table"));
+			String field=Utils.toString(map.get("column"));
+			String column=OrmUtil.toColumnName(field);
+			String searchType=Utils.toString(map.get("searchType"));
+			String refTable=Utils.toString(map.get("refTable"));
+			String refName=Utils.toString(map.get("refName"));
+			if("option".equalsIgnoreCase(searchType)||"browse".equalsIgnoreCase(searchType)){//需要自动左连接查询
+				String table_as=refTable+"_"+column;
+				fields+=(" ,"+table_as+"."+refName+" as "+column+"_name ");
+				if("option".equalsIgnoreCase(searchType)){
+					from+=(" left join "+refTable+" "+table_as+" on "+table_as+".table_name='"+table+
+							"' and "+table_as+".column_name='"+column+"' and "+table_as+".module='"+module+
+							"' and "+table_as+".data_value=t1."+column+" ");
+				}else{
+					from+=(" left join "+refTable+" "+table_as+" on "+table_as+".id=t1."+column+" ");
+				}
+				
+			}
+			
+			
+			
+		}
+		String dataSql="select " + fields+from+" "+where;
+		List<Map<String,Object>> list =basicDAO.findBySQL(dataSql, values,null,null);
+		return Utils.isEmpty(list)?null:JsonUtil.toObject(list.get(0));
 	}
 	
 }

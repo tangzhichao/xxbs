@@ -43,24 +43,24 @@ var categorySearch = function () {
             $select.find('select').append(opt_html);
         });
         $select.find('select').val('');
-        $('#search_form #puhuo_category_row').append($select);
+        $('#form_search #puhuo_category_row').append($select);
     }, removeChildCategory = function (level) {
         var level = level;
-        var $select = $('#search_form #puhuo_category_row .puhuo_category_search');
+        var $select = $('#form_search #puhuo_category_row .puhuo_category_search');
         $.each($select, function () {
             if ($(this).attr('level') > level) {
                 $(this).parents('div.col-md-2:first').remove();
             }
         });
     }, setCategoryValue = function (v) {
-        $('#search_form #category_id_path').val(v);
+        $('#form_search #category_id_path').val(v);
         //var category_name_path = [];
-        //var $categorys = $('#search_form .puhuo_category_search');
+        //var $categorys = $('#form_search .puhuo_category_search');
         //$categorys.each(function () {
         //    category_name_path.push($(this).find('option:selected').text());
         //});
         //var category_name_path_str = category_name_path.join('>');
-        //$('#search_form #category_name_path').val(category_name_path_str)
+        //$('#form_search #category_name_path').val(category_name_path_str)
     };
 
     var phCategory = function () {

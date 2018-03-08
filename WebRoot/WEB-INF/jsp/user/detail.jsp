@@ -179,5 +179,13 @@ td.lab {
 	<%-- <script src="<%=path %>/static/picture/js/picture.js" type="text/javascript"></script>
 	<script src="<%=path %>/static/picture/js/taskAll.js" type="text/javascript"></script>
 	<jsp:include page="public/ready.jsp"></jsp:include> --%>	
+
+
+<script type="text/javascript">
+	function view(id){
+		var d=top.dialog({title:"用户详情", url:rootpath+"/user/detail.do?id="+id, width:800, height:600});
+	    d.show();
+	}
+</script>
 </body>
 </html>

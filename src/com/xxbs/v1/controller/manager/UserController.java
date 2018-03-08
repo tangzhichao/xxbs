@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xxbs.v1.db.User;
 import com.xxbs.v1.db.UserDAO;
 import com.xxbs.v1.util.Utils;
+import com.xxbs.v1.util.gson.JsonUtil;
 import com.xxbs.v1.util.math.MathUtil;
 import com.xxbs.v1.util.orm.BasicDAO;
 import com.xxbs.v1.util.orm.OrmUtil;
@@ -104,13 +105,15 @@ public class UserController {
 	public String idQuery(HttpServletRequest request, HttpServletResponse response) {
 		JSONObject json = new JSONObject();
 		try {
-			ParamUtil.getId(request);
-			json.put("msg", "添加成功！");
+			String fields = " t1.* ";
+			String from = " from user t1 ";
+			Integer id = ParamUtil.getId(request);
 			json.put("code", "200");
+			json.put("data", QueryUtil.queryById(request, response, "user", fields, from, id+""));
 			return json.toString();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			json.put("msg", "删除失败！" + e.getMessage());
+			json.put("msg", "查询失败！" + e.getMessage());
 			json.put("code", "400");
 			return json.toString();
 		}

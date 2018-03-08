@@ -17,7 +17,7 @@
                         </button>
                     </div>
                     <div class="tools" style="padding: 0px">
-                        <button type="button" id="btn_add_user" onclick="showAddUserDialog()"
+                        <button type="button" id="btn_add_user" onclick="showAddModal()"
                                 style="margin-left: 10px;padding: 4px 10px;font-size: 14px;display: inline-block;"
                                 class="btn blue">
                             <i class="fa"></i> 添加用户
@@ -45,7 +45,7 @@
                 	</div>
                 </div>
                 <div class="portlet-body" style="display: block;">
-                    <form id="search_form" method="post" onkeydown="if(event.keyCode==13)return false;" onsubmit="return false;">
+                    <form id="form_search" method="post" onkeydown="if(event.keyCode==13)return false;" onsubmit="return false;">
                         <div class="modal-body">
                             <%=AutoGenerater.getSearchConditionHtml(application,"user")%>
                         </div>

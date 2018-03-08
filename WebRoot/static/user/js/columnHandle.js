@@ -25,8 +25,8 @@ var handleColumn=[
         "targets": [9],// 目标列位置，下标从0开始
         "orderable": false,//禁用排序
         "render":function(data, type, row){
-            return '<button class="btn btn-sm blue btn-outline" onclick="showUserDetail('+row.id+');return false;"><i class="fa fa-info"></i></button>'
-            +'<button class="btn btn-sm blue btn-outline" onclick="showUpdateDialog('+row.id+');return false;"><i class="fa fa-edit"></i></button>'
+            return '<button class="btn btn-sm blue btn-outline" onclick="showDetailModal('+row.id+');return false;"><i class="fa fa-info"></i></button>'
+            +'<button class="btn btn-sm blue btn-outline" onclick="showUpdateModal('+row.id+');return false;"><i class="fa fa-edit"></i></button>'
             +'<button class="btn btn-sm red btn-outline" onclick="deleteUser('+row.id+');return false;"><i class="fa fa-times"></i></button>';
         }
     }

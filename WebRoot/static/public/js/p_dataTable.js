@@ -6,7 +6,7 @@ var p_dataTable = function () {
     var table;
     var submitFilter = function () {
             aoDataParam = [];
-            table = $('#search_form');
+            table = $('#form_search');
             // get all typeable inputs
             $('textarea.form-filter, select.form-filter, input.form-filter:not([type="radio"],[type="checkbox"])', table).each(function () {
                 setAjaxParam($(this).attr("name"), $(this).val());
@@ -46,16 +46,16 @@ var p_dataTable = function () {
 
         tableSearch = function () {
             // 组合框搜索按钮
-            $(document).on('click', '#search_form #table_search', function (e) {
+            $(document).on('click', '#form_search #table_search', function (e) {
                 e.preventDefault();
                 submitFilter();
-                var oTable = $('#data_table').DataTable();
+                var oTable = $('#form_search').DataTable();
                 oTable.ajax.reload(null, false);
             });
-            $(document).on('click', '#search_form #table_research', function (e) {
+            $(document).on('click', '#form_search #table_research', function (e) {
                 e.preventDefault();
                 resetFilter();
-                var oTable = $('#data_table').DataTable();
+                var oTable = $('#form_search').DataTable();
                 oTable.ajax.reload(null, false);
             });
         };
@@ -77,7 +77,7 @@ var p_dataTable = function () {
             column.visible(true);
         };
     }, columnVisibleInit = function (){
-        var table = $('#data_table').DataTable();
+        var table = $('#form_search').DataTable();
             columnVisibleAll(table);
             var column_val = $('#column_visible_select').val();
             columnInvisibleVal(column_val, table);
@@ -115,7 +115,7 @@ var p_dataTable = function () {
     // 通过checkbox，获取所选择的相关数据。
     var checkBoxVal = function () {
             // 获取被选中checkbox 的 value   value一般就是对应数据行id的值。
-            var boxs = $('#data_table .checkboxes');
+            var boxs = $('#form_search .checkboxes');
             var idList = [];
             boxs.each(function () {
                 if ($(this).prop('checked')) {
@@ -126,9 +126,9 @@ var p_dataTable = function () {
         },
         checkBoxRow = function () {
             // 获取被选的行数据，返回列表。
-            var boxs = $('#data_table .checkboxes');
+            var boxs = $('#form_search .checkboxes');
             var dataRows = [];
-            var oTable = $('#data_table').DataTable();
+            var oTable = $('#form_search').DataTable();
             boxs.each(function () {
                 if ($(this).prop('checked')) {
                     var datarow = oTable.row($(this).parents('tr:first')).data();
@@ -146,9 +146,9 @@ var p_dataTable = function () {
 
     var checkBoxTitle80 = function () {
             // 获取被选中checkbox,找出title长度大于80的，主要用于提醒用户修改title，避免上架失败。。
-            var boxs = $('#data_table .checkboxes');
+            var boxs = $('#form_search .checkboxes');
             var titleList = [];
-            var oTable = $('#data_table').DataTable();
+            var oTable = $('#form_search').DataTable();
             boxs.each(function () {
                 if ($(this).prop('checked')) {
                     var datarow = oTable.row($(this).parents('tr:first')).data();
@@ -163,14 +163,14 @@ var p_dataTable = function () {
 
     var getDataRow = function (t) {
         // 获取datatable中行数据
-        var oTable = $('#data_table').DataTable();
+        var oTable = $('#form_search').DataTable();
         var datarow = oTable.row(t.parents('tr:first')).data();
         return datarow;
     };
 
     var getTableRow = function (t) {
         // 获取datatable中行数据
-        var oTable = $('#data_table').DataTable();
+        var oTable = $('#form_search').DataTable();
         var tablerow = oTable.row(t);
         return tablerow;
     };
@@ -252,7 +252,7 @@ var p_dataTable = function () {
             tableSearch(), columnVisible(), multiSelect(), menuActive()
         },
         tableReload: function () {
-            var oTable = $('#data_table').DataTable();
+            var oTable = $('#form_search').DataTable();
             oTable.ajax.reload(null, false);
         },
         checkBoxVal: checkBoxVal,

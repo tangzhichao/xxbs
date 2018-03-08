@@ -88,50 +88,50 @@ function showAddDialog(){
 }
 function showUpdateModal(id){
 	PublicModule.idQuery(id,function(data){
-		showModal(update_modal);
-		//TODO 根据columnConfig.js设置Modal里元素的值
-		/*
-		if(!isEmpty(showEdit)){
-			for(var i=0;i<showEdit.length;i++){
-				var pro_data=showEdit[i]["data"];
-				var pro_column=showEdit[i]["column"];
-				var pro_editType=showEdit[i]["editType"];
-				if(isEmpty(pro_column)){
-					pro_column=pro_data;
-				}
-				var pro_showName=data.data[pro_data];
-				var pro_dataValue=data.data[pro_column];
-				$("#"+pro_column).val(pro_value);
-			}
-		}*/
 		var obj=data.data;
+		alert(JSON.stringify(obj));
 		for(var pro in obj){
 			var value=obj[pro];
-			$("#"+pro).val(value);
+			$("#"+update_form+" #"+pro).val(value);
 		}
+		showModal(update_modal);
 	});
 }
-function showUpdateDialog(){
-	window.open(add_url, '_blank');
+function showUpdateDialog(id){
+	window.open(update_url+"?id="+id, '_blank');
+}
+function showDetailModal(id){
+	PublicModule.idQuery(id,function(data){
+		var obj=data.data;
+		alert(JSON.stringify(obj));
+		for(var pro in obj){
+			var value=obj[pro];
+			$("#"+detail_modal+" #"+pro).val(value);
+		}
+		showModal(detail_modal);
+	});
+}
+function showDetailDialog(id){
+	window.open(detail_url+"?id="+id, '_blank');
 }
 
 function getRules(formid){
-	var searchValidateRules = {};
+	var validateRules = {};
 	$.each($("#"+formid+" .form-control"), function () {
 		var attrs={};
 		attrs["required"]=!$(this).attr("required")||$(this).attr("required")==undefined?false:true;
 		attrs["number"]=!$(this).attr("number")||$(this).attr("number")==undefined?false:true;
 		attrs["maxlength"]=$(this).attr("maxlength");
 		attrs["dateISO"]=$(this).attr("date");
-		searchValidateRules[$(this).attr("name")]=attrs;
+		validateRules[$(this).attr("name")]=attrs;
 	});
-	return searchValidateRules;
+	return validateRules;
 }
 
 function searchValidate(){
-	var searchValidateRules = getRules(search_form);
+	var validateRules = getRules(search_form);
 	$("#"+search_form).validate({
-        rules: searchValidateRules,
+        rules: validateRules,
         debug:true,
         errorPlacement: function (error, element) {
             error.appendTo(element.parent());
@@ -159,8 +159,7 @@ importAction_url=rootpath+"/"+module+"/importAction.do";
 exportExcel_url=rootpath+"/"+module+"/exportExcel.do";
 row_checkbox="row_checkbox";
 all_selected_checkbox="all_selected_checkbox";
-//selected_row_ids="selected_row_ids";
-selected_row_ids="selectedUserId";
+selected_row_ids="selected_row_ids";
 //search_form="search_form";
 search_form="form_search";
 //data_table="data_table";
@@ -169,6 +168,7 @@ add_form="add_form";
 add_modal="add_modal";
 update_form="update_form";
 update_modal="update_modal";
+detail_modal="detail_modal";
 
 function initModule(){
 	
@@ -245,6 +245,9 @@ function initModule(){
 	}
 	if(isEmpty(update_modal)){
 		update_modal="update_modal";
+	}
+	if(isEmpty(detail_modal)){
+		detail_modal="detail_modal";
 	}
 }
 
@@ -329,9 +332,9 @@ var PublicModule=(function () {
 	}
 	
 	var addValidateListener = function () {
-        var searchValidateRules = getRules(add_form);
+        var validateRules = getRules(add_form);
         $("#"+add_form).validate({
-            rules: addUserValidateRules,
+            rules: validateRules,
             errorPlacement: function (error, element) {
                 error.appendTo(element.parent());
             },
@@ -411,9 +414,9 @@ var PublicModule=(function () {
 	}
 	
 	var updateValidateListener = function () {
-        var searchValidateRules = getRules(update_form);
+        var validateRules = getRules(update_form);
         $("#"+update_form).validate({
-            rules: addUserValidateRules,
+            rules: validateRules,
             errorPlacement: function (error, element) {
                 error.appendTo(element.parent());
             },
@@ -427,15 +430,15 @@ var PublicModule=(function () {
     return {//公开以下方法，其他没有列出的都是私有方法
         init:function(){
         	initModule();
+        	addValidateListener();
+        	updateValidateListener();
         },
         clear:clear,
         search:search,
         idQuery:idQuery,
-        addValidateListener:addValidateListener,
         addAction:addAction,
         addActionByForm:addActionByForm,
         deleteAction:deleteAction,
-        updateValidateListener:updateValidateListener,
         updateAction:updateAction,
         updateActionByForm:updateActionByForm,
     }
